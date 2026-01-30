@@ -4,15 +4,28 @@ import java.util.ArrayList;
 
 public class SistemaPedidos {
     // Variables globales mal ubicadas y poco descriptivas
-    private static double TASA_IVA = 0.21; // Esto es el IVA
+    private static final double TASA_IVA = 0.21; // Esto es el IVA
+
+    // Clase cliente
+    public void Cliente(String nombre, String codigo, String direccion) {
+        
+    }
+
+    public void getNombre(){
+        
+    }
+
+    public void pedido(){
+        Pedido pedido = new Pedido("");
+    }
+    public void Producto(String nombre, Double precio){
+        
+    }
+
 
     public static void main(String[] args) {
-        System.out.println("INICIANDO SISTEMA DE PEDIDOS v1.0...");
 
-        // --- CLIENTE 1: Datos dispersos ---
-        String c1_n = "TechSolutions SL";
-        String c1_id = "B12345678";
-        String c1_d = "Calle Industria 55, Madrid";
+        System.out.println("INICIANDO SISTEMA DE PEDIDOS v1.0...");
 
         // --- CLIENTE 1: Lista de productos (Arrays paralelos, mala práctica) ---
         ArrayList<String> NombreProducto = new ArrayList<>(); // Nombres productos
@@ -24,39 +37,41 @@ public class SistemaPedidos {
         precioProducto.add(2500.00);
         precioProducto.add(800.00);
         precioProducto.add(250.50);
+
         // --- CLIENTE 1: CÁLCULOS (Mezclados con impresión) ---
-        double t1 = 0; // total
-        System.out.println("Procesando pedido para: " + c1_n);
-        System.out.println("ID Cliente: " + c1_id);
+        //System.out.println(String.format("El cliente%s con ID %d debe %.2f euros.", nombre, id, total));
+        double total = 0; // total
+        System.out.println(String.format("Procesando pedido para: %s", Cliente.getNombre()));
+        System.out.println(String.format("ID Cliente: " + Cliente.get
+        ID() , "%s"));
 
         for (int i = 0; i < NombreProducto.size(); i++) {
-            t1 = t1 + precioProducto.get(i);
-            System.out.println("Item " + (i+1) + ": " + NombreProducto.get(i) + " - " + precioProducto.get(i) + " EUR");
+            total = total + precioProducto.get(i);
+            System.out.println(String.format("Item " + (i+1) + ": " + NombreProducto.get(i) + " - " + precioProducto.get(i) + " EUR"));
         }
         // Lógica de descuento "hardcodeada"
-        if (t1 > 3000) {
+        if (total > 3000) {
             System.out.println("Aplica descuento por gran volumen (5%)");
-            t1 = t1 * 0.95;
+            total = total * 0.95;
         }
 
-        double t1_iva = t1 + (t1 * TASA_IVA);
-        System.out.println("Total Neto: " + t1);
-        System.out.println("Total con IVA (" + (TASA_IVA*100) + "%): " + t1_iva);
-        System.out.println("--------------------------------------------------");
+        // Calcula el total más iva
+        double totalConIva = getTotalConIva(total);
+
         // --- CLIENTE 1: GUARDADO EN ARCHIVO (Responsabilidad mezclada) ---
         try {
-            FileWriter myWriter = new FileWriter("pedido_" + c1_id + ".txt");
+            FileWriter myWriter = new FileWriter("pedido_" + cliente.getID()+ ".txt");
             myWriter.write("FACTURA\n");
-            myWriter.write("Cliente: " + c1_n + "\n");
-            myWriter.write("Direccion: " + c1_d + "\n");
-            myWriter.write("Total a pagar: " + t1_iva + "\n");
+            myWriter.write("Cliente: " + cliente.getNombre() + "\n");
+            myWriter.write("Direccion: " + cliente.getDireccion() + "\n");
+            myWriter.write("Total a pagar: " + totalConIva + "\n");
             myWriter.close();
             System.out.println("Archivo guardado correctamente.");
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-        System.out.println("\n\n"); // Espacios feos
+
         // ====================================================================
         // --- CLIENTE 2: COPY-PASTE DEL CÓDIGO ANTERIOR (El horror) ---
         // ====================================================================
@@ -81,13 +96,19 @@ public class SistemaPedidos {
             System.out.println("Item " + (i+1) + ": " + p_n2.get(i) + " - " +
             p_p2.get(i) + " EUR");
         }
+
         // Lógica de descuento repetida (y si cambiamos una, la otra se queda
         //desactualizada)
+
+
+        /*
+
         if (t2 > 3000) {
             System.out.println("Aplica descuento por gran volumen (5%)");
             t2 = t2 * 0.95;
 
         }
+
         double t2_iva = t2 + (t2 * TASA_IVA);
         System.out.println("Total Neto: " + t2);
         System.out.println("Total con IVA (" + (TASA_IVA*100) + "%): " + t2_iva);
@@ -105,4 +126,14 @@ public class SistemaPedidos {
                 e.printStackTrace();
             }
         }
+        */
+    }
+
+    private static double getTotalConIva(double total) {
+        double totalConIva = total + (total * TASA_IVA);
+        System.out.println("Total Neto: " + total);
+        System.out.println("Total con IVA (" + (TASA_IVA*100) + "%): " + totalConIva);
+        System.out.println("--------------------------------------------------");
+        return totalConIva;
+    }
 }
