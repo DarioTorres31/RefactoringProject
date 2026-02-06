@@ -1,12 +1,25 @@
 
 public class Producto {
 
-    public Producto(String string) {
-        //TODO Auto-generated constructor stub
+    private String nombre;
+    private double precio;
+
+    public Producto (String nombre, double precio){
+        this.nombre = nombre;
+        this.precio = precio;
     }
 
-    public Producto(String string, double d) {
-        Producto producto = new Producto("Servidor Dell PowerEdge", 2500.00);
+
+    // ArrayList<Producto> precioProducto = new ArrayList<>();
+
+    // precioProducto.add(getPrecioProducto());
+    
+    public String getNombreProducto() {
+        return nombre;
+    }
+
+    public double getPrecioProducto() {
+        return precio;
     }
 
 }
