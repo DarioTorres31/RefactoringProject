@@ -17,6 +17,10 @@ public class Pedido {
         this.listaProductos.add(producto);
     }
     
+    public ArrayList<Producto> getListaProductos(){
+        return listaProductos;
+    }
+    
     public double calcularSubTotal(){
         
         double subTotal = 0;
