@@ -4,24 +4,31 @@ public class Pedido {
     private static final double DESCUENTO = 0.95;
     private static final double IVA = 0.21;
     
-    private Cliente cliente;
-    private ArrayList<Producto> listaProductos = new ArrayList<>();
+    private static Cliente cliente;
+    private static ArrayList<Producto> listaProductos = new ArrayList<>();
+    public static boolean correcto;
 
     public Pedido (Cliente cliente){
         this.cliente = cliente;
     }
 
-    
+    public static Cliente getCliente(){
+        return cliente;
+    }
 
     public void agregarProducto(Producto producto){
-        this.listaProductos.add(producto);
+        listaProductos.add(producto);
     }
     
     public ArrayList<Producto> getListaProductos(){
         return listaProductos;
     }
+
+    public static double getIva(){
+        return IVA;
+    }
     
-    public double calcularSubTotal(){
+    public static double calcularSubTotal(){
         
         double subTotal = 0;
 
@@ -37,28 +44,30 @@ public class Pedido {
         return subTotal;
     }
 
-    public double calcularDescuento(){
-        boolean correcto = false;
-        double subTotal = 0;
-        calcularSubTotal();
-        descuentoAplicado();
-        if (correcto = true){
-            subTotal = subTotal * DESCUENTO;
-        }
-        return subTotal;
+    public static double calcularDescuento(){
+        double subtotal = calcularSubTotal();
+
+        subtotal = subtotal * DESCUENTO; 
+
+        return subtotal;
     }
 
-    public boolean descuentoAplicado(){
-        double subTotal = 0;
-        boolean correcto = false;
-        if (subTotal > 3000){
-            correcto = true;
-        }
-        return correcto;
+    public static boolean descuentoAplicado(){
+        double subtotal = calcularDescuento();
+
+        if (subtotal > 3000){
+            return true;
+        }else{
+            return false;
+        } 
     }
     
-    public double getTotalConIva(double total) {
-        double totalConIva = total + (total * DESCUENTO);
-        return totalConIva;
+    public static double getTotalConIva(double total) {
+        double subtotal = calcularSubTotal();
+
+        subtotal = subtotal + (subtotal * IVA);
+
+        return subtotal;
     }
+
 }

@@ -1,0 +1,5 @@
+FACTURA
+Cliente: Libreria Moderna 
+Direccion: Av. Diagonal 200, Barcelona 
+Total a pagar: 2850,50
+ 

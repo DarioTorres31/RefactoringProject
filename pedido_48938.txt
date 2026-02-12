@@ -1,0 +1,5 @@
+FACTURA
+Cliente: Techsolutions SL 
+Direccion: Calle valencia 
+Total a pagar: 1350,50
+ 

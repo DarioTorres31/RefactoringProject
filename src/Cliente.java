@@ -1,24 +1,24 @@
 public class Cliente {
 
-    private String nombre;
-    private String id;
-    private String direccion;
-
+    private static String nombre;
+    private static String id;
+    private static String direccion;
+    
     public Cliente (String nombre, String id, String direccion){
-        this.nombre = nombre;
-        this.id = id;
-        this.direccion = direccion;
-    }
-
-    public String getNombre() {
+        Cliente.nombre = nombre;
+        Cliente.id = id;
+        Cliente.direccion = direccion;
+        }
+    
+    public static String getNombre() {
         return nombre;
     }
 
-    public String getId() {
+    public static String getId() {
         return id;
     }
 
-    public String getDireccion() {
+    public static String getDireccion() {
         return direccion;
     }
 
